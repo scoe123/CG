@@ -1,0 +1,45 @@
+#include <iostream>
+#include <math.h>
+#include <graphics.h>
+using namespace std;
+
+float xi,xf,yi,yf,dx,dy;
+float k;
+
+int main(){
+	
+	
+	cout<<"enter xi & yi"<<endl;
+	cin>>xi>>yi;
+	cout<<"enter xf & yf"<<endl;
+	cin>>xf>>yf;
+	
+	dx=xf-xi;
+	dy=yf-yi;
+	
+	int gd = DETECT, gm;
+	initgraph(&gd,&gm,NULL);
+	
+	if (abs(dx)>abs(dy))
+	{k=abs(dx);}
+	else
+	{ 
+	   k=abs(dy);
+	}
+	dx = dx/k;
+	dy = dy/k;
+	
+	float x = xi;
+	float y = yi;
+	for (int j=0;j<k;j++)
+	{
+		x = x + dx;
+		y = y + dy;
+		cout<<round(x)<<" "<<round(y)<<endl;
+		putpixel(x,y,2);
+	
+	}
+	
+	getch();
+	return 0;
+}
