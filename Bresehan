@@ -1,0 +1,49 @@
+#include<iostream>
+#include<conio.h>
+#include<graphics.h>
+using namespace std;
+float x,y,xc,yc,d,di,r;
+
+int main()
+{
+	
+	
+	cout<<"enter radius"<<endl;
+	cin>>r;
+	cout<<"enter start point"<<endl;
+	cin>>xc>>yc;
+	int gd = DETECT ,gm;
+	initgraph(&gd,&gm,NULL);
+	d = 3-(2*r);
+	
+	
+	x = 0;
+	y = r;
+
+	while (x<=y)
+	{
+	if (di<0)
+	{
+		x = x+1;
+		y = y;
+		di = di+ (4*x) + 6;
+	}
+	else if (di>=0)
+	{
+		x = x+1;
+		y = y-1;
+		di = di+ (4*(x-y))+10;
+	}
+	putpixel(x+xc,y+yc,2);
+	putpixel(y+yc,x+xc,2);
+	putpixel(-x+xc,y+yc,2);
+	putpixel(-y+yc,x+xc,2);
+	putpixel(-x+xc,-y+yc,2);
+	putpixel(-y+yc,-x+xc,2);
+	putpixel(x+xc,-y+yc,2);
+	putpixel(y+yc,-x+xc,2);
+
+}
+	getch();
+	return 0;
+}
