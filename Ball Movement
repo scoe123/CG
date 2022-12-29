@@ -1,0 +1,56 @@
+#include<iostream>
+#include<graphics.h>
+#include<dos.h>
+#include<process.h>
+#include<conio.h>
+
+using namespace std;
+int main()
+{
+	int i = 250, j = 250;
+	int x = 0, y = -1, ch;
+	int gd = DETECT, gm;
+	initgraph(&gd,&gm,NULL);
+	
+	while(1)
+	{
+		circle(i,j,25);
+		outtextxy(400,400,"press esc to exit ");
+		if(kbhit())
+		{
+			ch = getch();
+			if(ch == 72)
+			{
+				x = 0;
+				y = -5;
+			}
+			if(ch == 75)
+			{
+				x = -5;
+				y = 0;
+			}
+			
+			if(ch == 78)
+			{
+				x = 5;
+				y = 0;
+			}
+			if(ch == 80)
+			{
+				x = 0;
+				y = 5;
+			}
+			if(ch == 27)
+			{
+				exit(0);
+			}
+			
+			
+		}
+		i = i+x;
+		j = j+y;
+		delay(10);
+		cleardevice();
+		
+	 } 
+}
