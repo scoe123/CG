@@ -1,0 +1,97 @@
+#include <iostream>
+#include <graphics.h>
+using namespace std;
+
+void DDA(int xi,int yi,int xf,int yf)
+{
+	float dx = xf-xi;
+	float dy = yf-yi;
+	int step;
+	
+	if (abs(dx)>abs(dy))
+	{
+		step = abs(dx);
+	}
+	else
+	{
+		step = abs(dy);
+	}
+	
+	
+	dx = dx/step;
+	dy = dy/step;
+	
+	float x = xi;
+	float y = yi;
+	
+	for (int k=0; k<step ;k++)
+	{
+		putpixel(x,y,2);
+		x = x + dx;
+		y = y + dy;
+	}
+}
+
+void bresenham(int xc , int yc , int r)
+{
+	int d = 3 - (2*r);
+	int x = 0;
+	int y = r;
+	int j = 1;
+	while (x<=y)
+	{
+		if (d<0)
+		{
+			x = x + 1;
+			y = y;
+			d = d + 4*x + 6; 
+		}
+		else if (d>=0)
+		{
+			x = x + 1;
+			y = y - 1;
+			d = d + (4*(x-y)) + 10;
+		}
+		putpixel(x+xc,y+yc,2);
+		putpixel(x+xc,-y+yc,2);
+		putpixel(-x+xc,y+yc,2);
+		putpixel(-x+xc,-y+yc,2);
+		putpixel(y+xc,x+yc,2);
+		putpixel(y+xc,-x+yc,2);
+		putpixel(-y+xc,x+yc,2);
+		putpixel(-y+xc,-x+yc,2);
+	}
+}
+
+int main()
+{
+	int l,ax,ay,bx,by,cx,cy;
+	cout<<"enter base length: "<<endl;
+	cin>>l;
+	cout<<"enter coordinates of 1st corner:"<<endl;
+	cin>>ax>>ay;
+	bx = ax + (l/2);
+	by = ay - ((1.732/2)*l);
+	cx = ax + l;
+	cy = ay;
+	
+	int gd = DETECT,gm;
+	initgraph(&gd, &gm ,NULL);
+	
+	DDA(ax,ay,bx,by);
+	DDA(ax,ay,cx,cy);
+	DDA(bx,by,cx,cy);
+	
+	int h = abs(ay - by);
+	int xc = ax + (l/2);
+	int yc = ay - (int)(h/3);
+	
+	int r = h/3;
+	int R = (2*h)/3;
+	
+	bresenham(xc,yc,r);
+	bresenham(xc,yc,R);
+	
+	getch();
+	return 0;
+}
